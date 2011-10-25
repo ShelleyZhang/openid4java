@@ -444,7 +444,15 @@
       		<id>alchim.snapshots</id>
       		<name>Achim Repository Snapshots</name>
       		<url>http://alchim.sf.net/download/snapshots</url>
-      		<snapshots />
+      		<snapshots><enabled>true</enabled></snapshots>
+      		<releases><enabled>false</enabled></releases>
+    	</repository>
+    	<repository>
+      		<id>alchim.releases</id>
+      		<name>Achim Repository Releases</name>
+      		<url>http://alchim.sf.net/download/releases</url>
+      		<snapshots><enabled>false</enabled></snapshots>
+      		<releases><enabled>true</enabled></releases>
     	</repository>
 	</repositories>
 </project>
