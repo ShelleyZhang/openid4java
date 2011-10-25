@@ -10,9 +10,9 @@
 
   <modules>
     <!-- Only for holding java source -->
-    <!--module>openid4java-nodeps</module-->
     <module>..</module>
 
+<!--
     <module>openid4java</module>
     <module>openid4java-consumer</module>
     <module>openid4java-server</module>
@@ -21,11 +21,11 @@
     <module>openid4java-full</module>
     <module>openid4java-consumer-JdbcConsumerAssociationStore</module>
     <module>openid4java-consumer-JdbcNonceVerifier</module>
-    <module>openid4java-server-JdbcServerAssociationStore</module>
+    <module>openid4java-server-JdbcServerAssociationStore</module> 
 
-    <!-- Samples -->
     <module>openid4java-consumer-SampleConsumer</module>
     <module>openid4java-server-SampleServer</module>
+-->
   </modules>
 
   <build>
