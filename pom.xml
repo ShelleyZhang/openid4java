@@ -440,5 +440,11 @@
 			<id>guice</id>
 			<url>http://guice-maven.googlecode.com/svn/trunk</url>
 		</repository>
+		<repository>
+      		<id>alchim.snapshots</id>
+      		<name>Achim Repository Snapshots</name>
+      		<url>http://alchim.sf.net/download/snapshots</url>
+      		<snapshots />
+    	</repository>
 	</repositories>
 </project>
