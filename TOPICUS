@@ -1,0 +1,7 @@
+Op 24 oktober 2011 hebben wij, Hielke (Hoeve) en Tom (Kirchjunger), het project OpenId4Java in eigen beheer genomen. 
+We hebben daarvoor een kopie gemaakt van versie 0.9.7-SNAPSHOT. De ontwikkeling (en bugs fixen) aan OpenId4Java gaat 
+naar onze mening te langzaam. We kunnen nu zelf bugs fixen en het beheer van dependencies via Maven beter reguleren.
+
+Zie voor verder info, de officiele website van het project:
+
+	http://code.google.com/p/openid4java
