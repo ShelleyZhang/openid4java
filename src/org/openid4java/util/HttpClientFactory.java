@@ -87,7 +87,7 @@ public class HttpClientFactory
 
         SchemeRegistry registry = new SchemeRegistry();
 
-        registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+        registry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
         SSLSocketFactory sslSocketFactory;
         if (null == sslContext)
         {
@@ -101,7 +101,7 @@ public class HttpClientFactory
         {
         	sslSocketFactory.setHostnameVerifier(hostnameVerifier);
         }
-        registry.register(new Scheme("https", sslSocketFactory, 443));
+        registry.register(new Scheme("https", 443, sslSocketFactory));
         
         ClientConnectionManager connManager;
         if (multiThreadedHttpClient)

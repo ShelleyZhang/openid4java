@@ -10,7 +10,7 @@
 		<version>0.9.7-SNAPSHOT</version>
 		<relativePath>maven2/pom.xml</relativePath>
 	</parent>
-	<artifactId>openid4java-nodeps</artifactId>
+	<artifactId>openid4java-topicus</artifactId>
 	<packaging>jar</packaging>
 	<name>OpenID4Java no dependencies</name>
 
