@@ -69,15 +69,6 @@ public class YadisResolverTest extends TestCase
 		_server.stop();
 	}
 
-	/*
-	 * public void printResult(YadisResult result) { System.out.println("Yadis Status: " +
-	 * result.isSuccess() + " (" + result.getStatusMessage() + ")");
-	 * System.out.println("YadisURL: " + result.getYadisUrl().getUrl());
-	 * System.out.println("XRDS-Location: " + result.getXrdsLocation());
-	 * System.out.println("Content-type: " + result.getContentType());
-	 * System.out.println("XRDS:\n" + result.getXrds()); }
-	 */
-
 	public static Test suite()
 	{
 		return new TestSuite(YadisResolverTest.class);
@@ -191,19 +182,6 @@ public class YadisResolverTest extends TestCase
 		}
 	}
 
-	// public void testMultipleXrdsLocationInHeaders()
-	// {
-	// YadisResult result = _resolver.discover("http://localhost:" +
-	// _servletPort + "/?headers=multiplexrdslocation");
-	//
-	// assertEquals(result.getStatusMessage(),
-	// OpenIDException.YADIS_HEAD_INVALID_RESPONSE, result.isSuccess());
-	//
-	// // todo: jetty's HttpResponse.addHeader() doesn't actually set...
-	// assertEquals("should fail with multiple headers error",
-	// "Found more than one", result.getStatusMessage().substring(0,19));
-	// }
-
 	public void testInvalidXrdsLocationInHeaders()
 	{
 		try
@@ -294,6 +272,7 @@ public class YadisResolverTest extends TestCase
 	 * expected) { assertEquals(expected.getMessage(),
 	 * OpenIDException.YADIS_HTMLMETA_INVALID_RESPONSE, expected.getErrorCode()); } }
 	 */
+
 	public void testHtmlHeadElementsExtraHeadInBody()
 	{
 		try
@@ -343,19 +322,6 @@ public class YadisResolverTest extends TestCase
 				expected.getErrorCode());
 		}
 	}
-
-	// should make the server fail for the HTTP GET
-	// but not for the HEAD that is tried first
-	// public void testGetTransportError() throws Exception
-	// {
-	// //_server.stop();
-	//
-	// YadisResult result = _resolver.discover("http://localhost:" +
-	// _servletPort + "/?headers=simplehtml&html=failonget");
-	//
-	// assertEquals(expected.getMessage(),
-	// OpenIDException.YADIS_GET_TRANSPORT_ERROR, expected.getErrorCode());
-	// }
 
 	public void testXrdsSizeExceeded()
 	{
