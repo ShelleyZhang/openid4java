@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.openid4java</groupId>
 	<artifactId>openid4java-topicus</artifactId>
-	<version>0.9.8</version>
+	<version>0.9.9-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>OpenID4Java (topicus) no dependencies</name>
 
