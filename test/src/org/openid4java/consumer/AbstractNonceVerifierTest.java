@@ -4,88 +4,90 @@
 
 package org.openid4java.consumer;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-import junit.framework.TestCase;
-import org.openid4java.util.InternetDateFormat;
-import org.openid4java.server.NonceGenerator;
-import org.openid4java.server.IncrementalNonceGenerator;
+import static org.junit.Assert.*;
 
 import java.util.Date;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.openid4java.server.IncrementalNonceGenerator;
+import org.openid4java.server.NonceGenerator;
+import org.openid4java.util.InternetDateFormat;
 
 /**
  * @author Marius Scurtescu, Johnny Bufu
  */
-public abstract class AbstractNonceVerifierTest extends TestCase
+public abstract class AbstractNonceVerifierTest
 {
-    protected NonceVerifier _nonceVerifier;
-    protected InternetDateFormat _dateFormat = new InternetDateFormat();
-    public static final int MAX_AGE = 60;
+	protected NonceVerifier _nonceVerifier;
 
-    public AbstractNonceVerifierTest(String name)
-    {
-        super(name);
-    }
+	protected InternetDateFormat _dateFormat = new InternetDateFormat();
 
-    public void setUp() throws Exception
-    {
-        _nonceVerifier = createVerifier(MAX_AGE);
-    }
+	public static final int MAX_AGE = 60;
 
-    public abstract NonceVerifier createVerifier(int maxAge);
+	@Before
+	public void setUp() throws Exception
+	{
+		_nonceVerifier = createVerifier(MAX_AGE);
+	}
 
-    public void tearDown() throws Exception
-    {
-        super.tearDown();
-    }
+	public abstract NonceVerifier createVerifier(int maxAge);
 
-    public void testSeen()
-    {
-        String nonce = _dateFormat.format(new Date()) + "abc";
+	@Test
+	public void testSeen()
+	{
+		String nonce = _dateFormat.format(new Date()) + "abc";
 
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("op1", nonce));
-        assertEquals(NonceVerifier.SEEN, _nonceVerifier.seen("op1", nonce));
+		assertEquals(NonceVerifier.OK, _nonceVerifier.seen("op1", nonce));
+		assertEquals(NonceVerifier.SEEN, _nonceVerifier.seen("op1", nonce));
 
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("op2", nonce));
-    }
+		assertEquals(NonceVerifier.OK, _nonceVerifier.seen("op2", nonce));
+	}
 
-    public void testMalformed()
-    {
-        assertEquals(NonceVerifier.INVALID_TIMESTAMP, _nonceVerifier.seen("op1", "xyz"));
-    }
+	@Test
+	public void testMalformed()
+	{
+		assertEquals(NonceVerifier.INVALID_TIMESTAMP, _nonceVerifier.seen("op1", "xyz"));
+	}
 
-    public void testExpired()
-    {
-        Date now = new Date();
-        Date past = new Date(now.getTime() - (MAX_AGE + 1) * 1000);
+	@Test
+	public void testExpired()
+	{
+		Date now = new Date();
+		Date past = new Date(now.getTime() - (MAX_AGE + 1) * 1000);
 
-        String nonce = _dateFormat.format(past) + "abc";
+		String nonce = _dateFormat.format(past) + "abc";
 
-        assertEquals(NonceVerifier.TOO_OLD, _nonceVerifier.seen("op1", nonce));
-    }
+		assertEquals(NonceVerifier.TOO_OLD, _nonceVerifier.seen("op1", nonce));
+	}
 
-    public void testNonceCleanup() throws Exception
-    {
-        NonceGenerator nonceGenerator = new IncrementalNonceGenerator();
-        _nonceVerifier = createVerifier(1);
+	@Test
+	public void testNonceCleanup() throws Exception
+	{
+		NonceGenerator nonceGenerator = new IncrementalNonceGenerator();
+		_nonceVerifier = createVerifier(1);
 
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("http://example.com", nonceGenerator.next()));
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("http://example.com", nonceGenerator.next()));
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("http://example.com", nonceGenerator.next()));
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("http://example.com", nonceGenerator.next()));
+		assertEquals(NonceVerifier.OK,
+			_nonceVerifier.seen("http://example.com", nonceGenerator.next()));
+		assertEquals(NonceVerifier.OK,
+			_nonceVerifier.seen("http://example.com", nonceGenerator.next()));
+		assertEquals(NonceVerifier.OK,
+			_nonceVerifier.seen("http://example.com", nonceGenerator.next()));
+		assertEquals(NonceVerifier.OK,
+			_nonceVerifier.seen("http://example.com", nonceGenerator.next()));
 
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("http://example.net", nonceGenerator.next()));
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("http://example.net", nonceGenerator.next()));
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("http://example.net", nonceGenerator.next()));
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("http://example.net", nonceGenerator.next()));
+		assertEquals(NonceVerifier.OK,
+			_nonceVerifier.seen("http://example.net", nonceGenerator.next()));
+		assertEquals(NonceVerifier.OK,
+			_nonceVerifier.seen("http://example.net", nonceGenerator.next()));
+		assertEquals(NonceVerifier.OK,
+			_nonceVerifier.seen("http://example.net", nonceGenerator.next()));
+		assertEquals(NonceVerifier.OK,
+			_nonceVerifier.seen("http://example.net", nonceGenerator.next()));
 
-        Thread.sleep(1000);
+		Thread.sleep(1000);
 
-        assertEquals(NonceVerifier.OK, _nonceVerifier.seen("http://example.org", nonceGenerator.next()));
-    }
-
-    public static Test suite()
-    {
-        return new TestSuite(AbstractNonceVerifierTest.class);
-    }
+		assertEquals(NonceVerifier.OK,
+			_nonceVerifier.seen("http://example.org", nonceGenerator.next()));
+	}
 }

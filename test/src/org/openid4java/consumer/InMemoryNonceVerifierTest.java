@@ -4,35 +4,32 @@
 
 package org.openid4java.consumer;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import static org.junit.Assert.*;
+
+import org.openid4java.server.IncrementalNonceGenerator;
+import org.openid4java.server.NonceGenerator;
 
 /**
  * @author Marius Scurtescu, Johnny Bufu
  */
 public class InMemoryNonceVerifierTest extends AbstractNonceVerifierTest
 {
-    public InMemoryNonceVerifierTest(String name)
-    {
-        super(name);
-    }
+	@Override
+	public NonceVerifier createVerifier(int maxAge)
+	{
+		return new InMemoryNonceVerifier(maxAge);
+	}
 
-    public NonceVerifier createVerifier(int maxAge)
-    {
-        return new InMemoryNonceVerifier(maxAge);
-    }
+	@Override
+	public void testNonceCleanup() throws Exception
+	{
+		NonceGenerator nonceGenerator = new IncrementalNonceGenerator();
+		_nonceVerifier = createVerifier(1);
+		String nonce = nonceGenerator.next();
+		assertEquals(NonceVerifier.OK, _nonceVerifier.seen("http://example.com", nonce));
+		Thread.sleep(1000);
 
-    public void testNonceCleanup() throws Exception
-    {
-        super.testNonceCleanup();
-
-        InMemoryNonceVerifier inMemoryVerifier = (InMemoryNonceVerifier) _nonceVerifier;
-
-        assertEquals(1, inMemoryVerifier.size());
-    }
-
-    public static Test suite()
-    {
-        return new TestSuite(InMemoryNonceVerifierTest.class);
-    }
+		InMemoryNonceVerifier inMemoryVerifier = (InMemoryNonceVerifier) _nonceVerifier;
+		assertEquals(null, inMemoryVerifier.get(nonce));
+	}
 }
