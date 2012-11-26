@@ -302,9 +302,9 @@
 			<artifactId>xercesImpl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>xml-security</groupId>
+			<groupId>org.apache.santuario</groupId>
 			<artifactId>xmlsec</artifactId>
-			<version>1.3.0</version>
+			<version>1.5.2</version>
 		</dependency>
 
 		<!-- Infocard <dependency> <groupId>org.apache.ws.commons.axiom</groupId> 
