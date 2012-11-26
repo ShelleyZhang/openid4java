@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/maven-v4_0_0.xsd">
 	<!-- - This pom is only for `mvn eclipse:eclipse', - for complete structure, 
 		see directory maven2/. -->
 	<modelVersion>4.0.0</modelVersion>
@@ -10,7 +9,7 @@
 	</parent>
 	<groupId>org.openid4java</groupId>
 	<artifactId>openid4java-topicus</artifactId>
-	<version>0.9.9-SNAPSHOT</version>
+	<version>0.9.9</version>
 	<packaging>jar</packaging>
 	<name>OpenID4Java (topicus) no dependencies</name>
 
@@ -24,7 +23,7 @@
 	<scm>
 		<url>https://github.com/topicusonderwijs/openid4java</url>
 		<connection>scm:git:git@github.com:topicusonderwijs/openid4java.git</connection>
-		<tag>HEAD</tag>
+		<tag>0.9.9</tag>
 	</scm>
 
 	<build>
@@ -102,8 +101,7 @@
 								<copy todir="${test.data.build}">
 									<fileset dir="${test.data.src}" />
 								</copy>
-								<replace token="SERVLET_PORT" value="${test.servlet.port}"
-									dir="${test.data.build}" />
+								<replace token="SERVLET_PORT" value="${test.servlet.port}" dir="${test.data.build}" />
 							</tasks>
 						</configuration>
 						<goals>
